@@ -12,24 +12,24 @@ switch($action)
 		// Rechercher les visiteurs dans la BD
 		$lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
 		// Inclusion de la vue v_listeVisiteur.php
-		include("vues/v_listeVisiteur.php");break;
+		include("vues/v_listeVisiteurRembourser.php");break;
 	}
 	case'validerVisiteur' :{
 		$lesVisiteurs = $pdo->getLesVisiteurs();
 		$leMois = getMoisEnCours();
 		$idVisiteur = trim($_REQUEST['lstVisiteur']);
-		include("vues/v_etatFrais.php");break;
+		include("vues/v_listeMoisRembourser.php");break;
 	}
 	case'validerMois' :{
 		$lesCles = array_keys( $lesMois );
 		$moisASelectionner = $lesCles[0];
-		include("vues/v_listeMois.php");
+		include("vues/v_listeFraisRembourser.php");
 	}
 	case'validerRemboursement' :{
 		$lesVisiteurs = $pdo->getLesVisiteurs();
 		$leMois = getMoisEnCours();
 		$idVisiteur = trim($_REQUEST['lstVisiteur']);
-		include("vues/v_listeFrais.php");break;
+		include("vues/v_listeFraisRembourser.php");break;
 	}
 }
 
