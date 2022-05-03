@@ -20,13 +20,13 @@ switch($action)
 	case'validerMois' :{
 		$lesCles = array_keys( $lesMois );
 		$moisASelectionner = $lesCles[0];
-		include("vues/v_listeMois.php");
+		include("vues/v_listeFraisRembourser.php");
 	}
 	case'validerRemboursement' :{
 		$lesVisiteurs = $pdo->getLesVisiteurs();
 		$leMois = getMoisEnCours();
 		$idVisiteur = trim($_REQUEST['lstVisiteur']);
-		include("vues/v_listeFrais.php");break;
+		include("vues/v_listeFraisRembourser.php");break;
 	}
 }
 
