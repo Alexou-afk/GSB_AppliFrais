@@ -1,57 +1,92 @@
-<table class="listeLegere">
-  	   <caption>Descriptif des éléments hors forfait
-       </caption>
-             <tr>
-                <th class="date">Date</th>
-				<th class="libelle">Libellé</th>  
-                <th class="montant">Montant</th>  
-                <th class="action">&nbsp;</th>              
-             </tr>
-          
-    <?php    
-	    foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 
-		{
-			$libelle = $unFraisHorsForfait['libelle'];
-			$date = $unFraisHorsForfait['dateFrais'];
-			$montant=$unFraisHorsForfait['montant'];
-			$id = $unFraisHorsForfait['id'];
-	?>		
-            <tr>
-                <td> <?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
-                <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-				onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
-             </tr>
-	<?php		 
-          
-          }
-	?>	  
-                                          
-    </table>
-      <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
-      <div class="corpsForm">
-         
-          <fieldset>
-            <legend>Nouvel élément hors forfait
-            </legend>
-            <p>
-              <label for="txtDateHF">Date (jj/mm/aaaa)</label>
-              <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
-            </p>
-            <p>
-              <label for="txtLibelleHF">Libellé</label>
-              <input type="text" id="txtLibelleHF" name="libelle" size="50" maxlength="256" value="" />
-            </p>
-            <p>
-              <label for="txtMontantHF">Montant</label>
-              <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
-            </p>
-          </fieldset>
-		  <p class="titre" /><label class="titre">&nbsp;</label><input class="zone" type="submit" value="Ajouter" size="20" />
-        <input id="effacer" type="reset" value="Effacer" size="20" />
-      </p> 
-      </div>
-        
-      </form>
+<!-- Division principale -->
+<div id="contenu">
+      <h2> Suivi de paiement</h2>
+
+	<form action="index.php?uc=suivrePaiement&action=modifierFraisForfait" method="post" role="form">
+
+	<input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
+  <input name="lstVisiteurs" type="hidden" id="lstVisiteurs" class="form-control" value="<?php echo $visiteurASelectionner ?>">
+
+		<div class="corpsForm">
+
+
+    <b>Visiteur : </b> <?php echo $idVisiteur ?><br>
+    <b>Mois : </b> <?php echo $numMois."-".$numAnnee ?><br>
+
+
+			<!-- Frais forfait -->
+			<div style="clear:left;"><h3>Frais au forfait </h3>
+					<table style="color:white;" border="1">
+						<tr><th></th><th>Etape</th><th>Km </th><th>Nuitée </th><th>Repas midi</th></tr>
+						<tr align="center"><th>Quantité</th>
+					 
+						<?php
+          					foreach (  $lesFraisForfait as $unFraisForfait  ) 
+		  					{
+								$idFrais = $unFraisForfait['idfrais'];
+								$quantite = $unFraisForfait['quantite'];
+						?>
+								<th width='80' input type='text' size='3' name="lesFrais[<?php echo $idFrais ?>]" ><?php echo $quantite?></th>
+		 				<?php
+          					}
+						?>
+	
+						</tr>
+					</table>				 
+			</div>
+
+
+	</form>
+
+	<form action="index.php?uc=validerFrais&action=validerFrais" method="post">
+
+	<input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
+    <input name="lstVisiteurs" type="hidden" id="lstVisiteurs" class="form-control" value="<?php echo $visiteurASelectionner ?>">
+
+
+
+			
+			<!-- Frais hors-forfait -->	
+
+            <p class="titre" />
+			<div style="clear:left;"><h3>Hors Forfait </h3>
+			<table style="color:white;" border="1">
+					<tr>
+					<th>Date</th>
+					<th>Libellé </th>
+					<th>Montant</th>
+					</tr>
+					<?php      
+          				foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
+		  				{
+							$idFrais = $unFraisHorsForfait['id'];
+							$dateHF = $unFraisHorsForfait['dateFrais'];
+							$libelleHF = $unFraisHorsForfait['libelle'];
+							$montantHF = $unFraisHorsForfait['montant'];
+					?>
+					<tr align='center'>
+						
+						<th width='100'input type='text' size='12' name='txtDate'   ><?php echo $dateHF ?></th>
+						<th width='220'input type='text' size='30' name='txtLibelle'><?php echo $libelleHF ?></th> 
+						<th width='90' input type='text' size='10' name='txtMontant'><?php echo $montantHF ?>'</th>
+					</tr>
+        			<?php 
+          				}
+					?>	
+					
+				</table>		
+			</div>
+			<br></br>
+			<p class="titre" />
+			<div style="clear:left;"><h3>Hors classification</h3>
+			<b>Nombres de justificatifs : </b> <?php echo $nbJustificatifs ?><br>
+			<b>Montant total de la fiche : </b><?php echo $montantTotal ?>	
+			<p class="titre" /><label class="titre">&nbsp;</label><input class="zone" type="submit" value="Rebourser"/>
+			</div>	
+	
+
+		</div>
+	</form>
+ 
+	 
   </div>

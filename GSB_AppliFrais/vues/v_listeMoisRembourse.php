@@ -1,6 +1,9 @@
 ﻿ <div id="contenu">
       <h2>Mes fiches de frais</h2>
       <form action="index.php?uc=suivrePaiement&action=validerMois" method="post">
+
+	  <input name="lstVisiteurs" type="hidden" id="lstVisiteurs" class="form-control" value="<?php echo $idVisiteur ?>">
+
       <div class="corpsForm">
          
       <p>
