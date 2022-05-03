@@ -12,9 +12,11 @@ switch($action)
         $lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
         $lesMois = $pdo->getLesMoisDontFicheVA();
 			include("vues/v_listeVisiteurRembourse.php");
+	break;
 	}
 	case'validerVisiteur' :{
-		
+        $lesMois = $pdo->getLesMoisDontFicheVA();
+		include("vues/v_listeMois.php");
 	break;
 	}
 	case'validerMois' :{
