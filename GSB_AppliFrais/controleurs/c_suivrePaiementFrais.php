@@ -8,7 +8,6 @@ $action = trim(htmlentities($_REQUEST['action']));
 switch($action)
 {
 	case'selectionnerVisiteur':{
-        
         $lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
         $lesMois = $pdo->getLesMoisDontFicheVA();
 			include("vues/v_listeVisiteurRembourse.php");
