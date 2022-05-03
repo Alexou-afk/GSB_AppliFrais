@@ -1,7 +1,7 @@
   <!-- Division principale -->
   <div id="contenu">
       <h2>SuivrePaiement</h2>
-      <form action="index.php?uc=validerFrais&action=validerFicheVisiteur" method="post">
+      <form action="index.php?uc=suivrePaiement&action=validerVisiteur" method="post">
 	     <div class="corpsForm">
 		<!-- Combo visiteur -->
 		<p>

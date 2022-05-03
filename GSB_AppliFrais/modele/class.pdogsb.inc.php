@@ -620,7 +620,7 @@ class PdoGsb{
     public function getLesVisiteursDontFicheVA()
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
-            'SELECT id, nom, prenom '
+            'SELECT distinct id, nom, prenom '
             .'FROM visiteur join fichefrais on(id=idVisiteur)'
             .'WHERE fichefrais.idEtat="VA"'   
             .'ORDER BY nom'
