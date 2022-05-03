@@ -301,7 +301,7 @@ class PdoGsb{
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  * @param $libelle : le libelle du frais
- * @param $date : la date du frais au format français jj//mm/aaaa
+ * @param $date : la date du frais au format français jj/mm/aaaa
  * @param $montant : le montant
 */
 	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
@@ -485,13 +485,13 @@ class PdoGsb{
      */
      public function montantHF($idVisiteur,$leMois){
         $requetePrepare = PdoGsb::$monPdo->prepare(
-        'SELECT SUM(lignefraishorsforfait.montant) '
-        . 'FROM lignefraishorsforfait '
-        . 'WHERE lignefraishorsforfait.idvisiteur = :unIdVisiteur '
-        . 'AND lignefraishorsforfait.mois = :unMois '
-        . 'AND lignefraishorsforfait.libelle not in (SELECT libelle '
-                . 'FROM lignefraishorsforfait '
-                . 'WHERE libelle like "REFUSÉ:%")'    
+            'SELECT SUM(lignefraishorsforfait.montant) '
+            . 'FROM lignefraishorsforfait '
+            . 'WHERE lignefraishorsforfait.idvisiteur = :unIdVisiteur '
+            . 'AND lignefraishorsforfait.mois = :unMois '
+            . 'AND lignefraishorsforfait.libelle not in (SELECT libelle '
+            . 'FROM lignefraishorsforfait '
+            . 'WHERE libelle like "REFUSÉ:%")'    
         );
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $leMois, PDO::PARAM_STR);
@@ -620,7 +620,7 @@ class PdoGsb{
     public function getLesVisiteursDontFicheVA()
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
-            'SELECT *'
+            'SELECT distinct *'
             .'FROM visiteur join fichefrais on(id=idvisiteur)'
             .'WHERE fichefrais.idetat="VA"'   
             .'ORDER BY nom'
