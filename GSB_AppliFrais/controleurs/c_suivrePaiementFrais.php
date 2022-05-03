@@ -15,7 +15,7 @@ switch($action)
 	}
 	case'validerVisiteur' :{
         $lesMois = $pdo->getLesMoisDontFicheVA();
-		include("vues/v_listeMois.php");
+		include("vues/v_listeMoisRembourser.php");
 	break;
 	}
 	case'validerMois' :{
