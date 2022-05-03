@@ -659,6 +659,33 @@ class PdoGsb{
         return $lesMois;
     }
 
+/**
+ * Retourne les mois pour lesquel un visiteur a une fiche de frais
+ 
+ * @param $idVisiteur 
+ * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
+*/
+public function getLesMoisDisponiblesDontFicheVA($idVisiteur){
+    $req = "select fichefrais.mois as mois from  fichefrais where fichefrais.idVisiteur = :idVisiteur and fichefrais.idetat='VA'
+    order by fichefrais.mois desc ";
+    $idJeuRes = PdoGsb::$monPdo->prepare($req); 
+    $idJeuRes->execute(array( ':idVisiteur' => $idVisiteur));	
+    $ligne = $idJeuRes->fetch();
+    $lesMois =array();
+    while($ligne != null)	{
+        $mois = $ligne['mois'];
+        $numAnnee =substr( $mois,0,4);
+        $numMois =substr( $mois,4,2);
+        $lesMois["$mois"]=array(
+         "mois"=>"$mois",
+         "numAnnee"  => "$numAnnee",
+         "numMois"  => "$numMois"
+         );
+        $ligne = $idJeuRes->fetch();		
+    }
+    return $lesMois;
+}
+
     /**
      * Modifie l'état de la fiche de frais en passant de "VA" à "RB"
      * @param string $idVisiteur      ID du visiteur
