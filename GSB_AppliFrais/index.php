@@ -27,7 +27,7 @@ switch($uc){
 		
 	}
 	case 'suivrePaiement':{
-		include("controleur/c_suivrePaiementFrais.php");break;
+		include("controleurs/c_suivrePaiementFrais.php");break;
 	}
 }
 include("vues/v_pied.php") ;
