@@ -10,6 +10,7 @@ switch($action)
 	case'selectionnerVisiteur':{
         $lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
 			include("vues/v_listeVisiteurRembourse.php");
+			
 	break;
 	}
 	case'validerVisiteur' :{
