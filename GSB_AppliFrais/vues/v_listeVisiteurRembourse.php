@@ -31,7 +31,7 @@
 		
 		<!-- Affichage du mois -->
 		<p>
-        <label for="lstMois">Mois</label>
+        <label for="lstMois">Mois : </label>
 		<select id="lstMois" name="lstMois">
 			<?php
 			foreach($lesMois as $unMois){
