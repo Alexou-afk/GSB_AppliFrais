@@ -8,15 +8,14 @@ $action = trim(htmlentities($_REQUEST['action']));
 switch($action)
 {
 	case'selectionnerVisiteur':{
-        
         $lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
         $lesMois = $pdo->getLesMoisDontFicheVA();
-			include("vues/v_listeVisiteurRembourse.php");
+	    include("vues/v_listeVisiteurRembourse.php");
 	}
 	case'validerVisiteur' :{
 		$lesVisiteurs = $pdo->getLesVisiteurs();
 		$leMois = getMoisEnCours();
-		$idVisiteur = trim($_REQUEST['lstVisiteur']);
+		$idVisiteur = trim($_REQUEST['lstVisiteurs']);
 		include("vues/v_listeMoisRembourser.php");break;
 	}
 	case'validerMois' :{
