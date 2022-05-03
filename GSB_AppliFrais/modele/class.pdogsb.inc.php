@@ -658,5 +658,21 @@ class PdoGsb{
         }
         return $lesMois;
     }
+
+    /**
+     * Modifie l'état de la fiche de frais en passant de "VA" à "RB"
+     * @param string $idVisiteur      ID du visiteur
+     * @param int $leMois             Mois sous la forme aaaamm
+     */
+    public function updateVAtoRB($idVisiteur, $leMois)
+    {
+        $requetePrepare = PDOGSB::$monPdo->prepare(
+            'UPDATE fichefrais'
+            .'SET idEtat = "RB"'
+            ."WHERE fichefrais.idVisiteur = '$idVisiteur'"
+            ."AND fichefrais.mois = '$leMois'"
+        );
+        $requetePrepare->execute();
+    }
 }
 ?>
