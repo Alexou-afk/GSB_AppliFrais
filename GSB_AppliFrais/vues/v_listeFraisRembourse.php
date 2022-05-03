@@ -2,7 +2,7 @@
 <div id="contenu">
       <h2> Suivi de paiement</h2>
 
-	<form action="index.php?uc=suivrePaiement&action=modifierFraisForfait" method="post" role="form">
+	<form action="index.php?uc=suivrePaiement&action=validerRemboursement" method="post" role="form">
 
 	<input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
   <input name="lstVisiteurs" type="hidden" id="lstVisiteurs" class="form-control" value="<?php echo $visiteurASelectionner ?>">
@@ -34,11 +34,6 @@
 						</tr>
 					</table>				 
 			</div>
-
-
-	</form>
-
-	<form action="index.php?uc=validerFrais&action=validerFrais" method="post">
 
 	<input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
     <input name="lstVisiteurs" type="hidden" id="lstVisiteurs" class="form-control" value="<?php echo $visiteurASelectionner ?>">
@@ -81,7 +76,7 @@
 			<div style="clear:left;"><h3>Hors classification</h3>
 			<b>Nombres de justificatifs : </b> <?php echo $nbJustificatifs ?><br>
 			<b>Montant total de la fiche : </b><?php echo $montantTotal ?>	
-			<p class="titre" /><label class="titre">&nbsp;</label><input class="zone" type="submit" value="Rebourser"/>
+			<p class="titre" /><label class="titre">&nbsp;</label><input class="zone" type="submit" value="Rembourser"/>
 			</div>	
 	
 

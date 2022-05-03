@@ -10,7 +10,7 @@ switch($action)
 	case'selectionnerVisiteur':{
         $lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
 			include("vues/v_listeVisiteurRembourse.php");
-			
+
 	break;
 	}
 	case'validerVisiteur' :{
@@ -21,7 +21,12 @@ switch($action)
 	}
 	case'validerMois' :{
         $idVisiteur = filter_input(INPUT_POST, 'lstVisiteurs', FILTER_SANITIZE_STRING);
+		$lesVisiteurs=$pdo->getLesVisiteurs();
+        $visiteurASelectionner=$idVisiteur; 
+		
 		$leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+		$lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+		$moisASelectionner = $leMois;
 		
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
@@ -43,10 +48,20 @@ switch($action)
 	break;
 	}
 	case'validerRemboursement' :{
-		$lesVisiteurs = $pdo->getLesVisiteurs();
-		$leMois = getMoisEnCours();
-		$idVisiteur = trim($_REQUEST['lstVisiteur']);
-		include("vues/v_listeFraisRembourse.php");break;
+        $idVisiteur = filter_input(INPUT_POST, 'lstVisiteurs', FILTER_SANITIZE_STRING);
+		$lesVisiteurs=$pdo->getLesVisiteurs();
+        $visiteurASelectionner=$idVisiteur; 
+		
+		$leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+        $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+		$moisASelectionner = $leMois;
+		
+        $etat='RB';
+		$pdo->majEtatFicheFrais($idVisiteur, $leMois, $etat);
+		
+		echo 'La fiche a bien été remboursée !';
+		include("vues/v_accueil.php");
+	break;
 	}
 }
 
