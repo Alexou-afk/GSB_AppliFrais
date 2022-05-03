@@ -14,10 +14,8 @@ switch($action)
 			include("vues/v_listeVisiteurRembourse.php");
 	}
 	case'validerVisiteur' :{
-		$lesVisiteurs = $pdo->getLesVisiteurs();
-		$leMois = getMoisEnCours();
-		$idVisiteur = trim($_REQUEST['lstVisiteur']);
-		include("vues/v_etatFrais.php");break;
+		
+	break;
 	}
 	case'validerMois' :{
 		$lesCles = array_keys( $lesMois );
