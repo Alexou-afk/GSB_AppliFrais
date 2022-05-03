@@ -21,7 +21,7 @@ switch($action)
 	case'validerMois' :{
 		$lesCles = array_keys( $lesMois );
 		$moisASelectionner = $lesCles[0];
-		include("vues/v_listeFraisRembourser.php");
+		include("vues/v_listeFraisRembourse.php");
 	}
 	case'validerRemboursement' :{
 		$lesVisiteurs = $pdo->getLesVisiteurs();
