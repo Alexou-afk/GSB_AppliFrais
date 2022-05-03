@@ -10,7 +10,7 @@ switch($action)
 	case'selectionnerVisiteur':{
 		$lesMois = $pdo->getLesMoisDontFicheVA();
 		// Rechercher les visiteurs dans la BD
-		$LesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
+		$lesVisiteurs = $pdo->getLesVisiteursDontFicheVA();
 		// Inclusion de la vue v_listeVisiteur.php
 		include("vues/v_listeVisiteur.php");break;
 	}
