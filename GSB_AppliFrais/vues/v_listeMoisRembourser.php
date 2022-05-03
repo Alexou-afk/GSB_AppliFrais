@@ -1,6 +1,6 @@
 ﻿ <div id="contenu">
       <h2>Mes fiches de frais</h2>
-      <form action="index.php?uc=suivrePaiement&action=voirEtatFrais" method="post">
+      <form action="index.php?uc=suivrePaiement&action=validerMois" method="post">
       <div class="corpsForm">
          
       <p>
