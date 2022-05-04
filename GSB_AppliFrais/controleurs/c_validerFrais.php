@@ -12,6 +12,7 @@ switch($action)
         $lesMois = getLesDouzeDerniersMois($mois);
 			include("vues/v_listeVisiteur.php");
 	break;
+
 	}
 
 	case'validerFicheVisiteur' :{
@@ -27,7 +28,13 @@ switch($action)
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
 
-		if(!is_array($lesInfosFicheFrais)){
+		if ($lesInfosFicheFrais['libEtat'] == "VA" or "RB")
+		{
+			ajouterErreur('Pas de fiche de frais pour ce visiteur ce mois');
+			include("vues/v_erreurs.php");
+			include("vues/v_listeVisiteur.php");
+		}
+		elseif(!is_array($lesInfosFicheFrais)){
             ajouterErreur('Pas de fiche de frais pour ce visiteur ce mois');
             include("vues/v_erreurs.php");
 			include("vues/v_listeVisiteur.php");

@@ -157,12 +157,15 @@ class PdoGsb{
     }
 
 // Recherche du nom et prenom des visiteurs
-	public function getLesVisiteurs(){
-		$reqV = "select visiteur.id as id, visiteur.nom as nomV, visiteur.prenom as prenomV from visiteur order by visiteur.nom";
-		$idJeuResVisiteur = PdoGsb::$monPdo->prepare($reqV);
-		$idJeuResVisiteur->execute();
-		$lesLignesV = $idJeuResVisiteur->fetchAll();
-		return $lesLignesV;
+	public function getLesVisiteurs(){        
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT distinct visiteur.id as id, visiteur.nom as nomV, visiteur.prenom as prenomV '
+            .'FROM visiteur join fichefrais on(id=idVisiteur)'
+            .'WHERE fichefrais.idEtat != "VA" or fichefrais.idEtat != "RB" '   
+            .'ORDER BY nom'
+        );
+        $requetePrepare->execute();
+        return $requetePrepare->fetchAll();
 	}
 /**
  * Met à jour la table LigneFraisForfait
@@ -548,7 +551,6 @@ class PdoGsb{
      * @param int $montantHF        Montant du frais
      */
     public function creeFHFReporte($idVisiteur,$leMois,$libelleHF,$dateHF,$montantHF){
-                    //var_dump($idVisiteur,$leMois,$libelleHF,$dateHF,$montantHF);
             $dateFr = dateFrancaisVersAnglais($dateHF);
             $requetePrepare = PdoGSB::$monPdo->prepare(
                 "INSERT INTO lignefraishorsforfait "

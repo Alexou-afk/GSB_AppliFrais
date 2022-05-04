@@ -29,7 +29,7 @@ switch($action)
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
 		$lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
-		
+
 		$sommeHF = $pdo->montantHF($idVisiteur,$leMois);
 		$totalHF=$sommeHF[0][0];
 		$sommeFF=$pdo->montantFF($idVisiteur,$leMois);
