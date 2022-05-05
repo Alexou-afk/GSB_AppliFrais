@@ -33,7 +33,6 @@
         </select>
       </p>
 		  <p class="titre" /><label class="titre">&nbsp;</label><input class="zone" type="submit" value="Valider" size="20" />
-        <input id="annuler" type="reset" value="Effacer" size="20" />
       </p> 
       </div>
         
