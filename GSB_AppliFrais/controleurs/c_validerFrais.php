@@ -26,8 +26,14 @@ switch($action)
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
-
-		if(!is_array($lesInfosFicheFrais)){
+		if($libEtat = $lesInfosFicheFrais['libEtat'] == "VA" or "RB")
+		{
+            ajouterErreur('La fiche de frais a déja valider ou rembourser pour ce visiteur ce mois');
+            include("vues/v_erreurs.php");
+			include("vues/v_listeVisiteur.php");
+		}
+		elseif(!is_array($lesInfosFicheFrais))
+		{
             ajouterErreur('Pas de fiche de frais pour ce visiteur ce mois');
             include("vues/v_erreurs.php");
 			include("vues/v_listeVisiteur.php");
@@ -38,6 +44,8 @@ switch($action)
 			$sommeFF=$pdo->montantFF($idVisiteur,$leMois);
 			$totalFF=$sommeFF[0][0];
 			$montantTotal=$totalHF+$totalFF;
+
+
 
 			$nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
 			include("vues/v_listeFrais.php");
