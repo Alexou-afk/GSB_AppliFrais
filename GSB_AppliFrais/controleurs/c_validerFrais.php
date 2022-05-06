@@ -26,9 +26,8 @@ switch($action)
 
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
-
-		if ($lesInfosFicheFrais['libEtat'] == "VA" or "RB")
+		$lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+		if($lesInfosFicheFrais['libEtat'] == "VA" or $lesInfosFicheFrais['libEtat'] ==  "RB")
 		{
 			ajouterErreur('Pas de fiche de frais pour ce visiteur ce mois');
 			include("vues/v_erreurs.php");
@@ -45,6 +44,8 @@ switch($action)
 			$sommeFF=$pdo->montantFF($idVisiteur,$leMois);
 			$totalFF=$sommeFF[0][0];
 			$montantTotal=$totalHF+$totalFF;
+
+
 
 			$nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
 			include("vues/v_listeFrais.php");

@@ -10,7 +10,7 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  
  * @package default
- * @author Cheri Bibi
+ * @author Alexendre Cant, Axel Gilbert, Simon Paumier
  * @version    1.0
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
