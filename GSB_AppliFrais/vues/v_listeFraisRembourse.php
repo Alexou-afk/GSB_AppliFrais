@@ -1,5 +1,10 @@
 
 	<form action="index.php?uc=suivrePaiement&action=validerRemboursement" method="post" role="form">
+  
+  <input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
+  <input name="lstVisiteurs" type="hidden" id="lstVisiteurs" class="form-control" value="<?php echo $visiteurASelectionner ?>">
+
+
   <h3>Fiche de frais du mois <?php echo $numMois."-".$numAnnee?> 
     </h3>
     <div class="encadre">
@@ -60,8 +65,6 @@
 			<p class="titre" /><label class="titre">&nbsp;</label><input class="zone" type="submit" value="Rembourser"/>
   </div>
   </div>
-
-
 	</form>
  
 	 

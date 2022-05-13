@@ -21,6 +21,7 @@ switch($action)
 	}
 	case'validerMois' :{
         $idVisiteur = filter_input(INPUT_POST, 'lstVisiteurs', FILTER_SANITIZE_STRING);
+        $visiteurASelectionner=$idVisiteur; 
 
 		$leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
 		$lesMois=$pdo->getLesMoisDisponiblesDontFicheVA($idVisiteur);
@@ -61,7 +62,7 @@ switch($action)
 		$moisASelectionner = $leMois;
 		
         $etat='RB';
-		$pdo->majEtatFicheFrais($idVisiteur, $leMois, $etat);
+		$pdo->updateVAtoRB($idVisiteur, $leMois);
 		
 		echo 'La fiche a bien été remboursée !';
 		include("vues/v_accueil.php");

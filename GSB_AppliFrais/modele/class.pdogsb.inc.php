@@ -10,7 +10,7 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  
  * @package default
- * @author Alexendre Cant, Axel Gilbert, Simon Paumier
+ * @author Cheri Bibi
  * @version    1.0
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
@@ -160,8 +160,7 @@ class PdoGsb{
 	public function getLesVisiteurs(){        
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT distinct visiteur.id as id, visiteur.nom as nomV, visiteur.prenom as prenomV '
-            .'FROM visiteur join fichefrais on(id=idVisiteur)'
-            .'WHERE fichefrais.idEtat != "VA" or fichefrais.idEtat != "RB" '   
+            .'FROM visiteur '
             .'ORDER BY nom'
         );
         $requetePrepare->execute();
@@ -219,7 +218,7 @@ class PdoGsb{
 		$idJeuRes->execute(array( ':idVisiteur' => $idVisiteur, ':mois' => $mois));	
 		$ligne = $idJeuRes->fetch();
 		if($ligne['nblignesfrais'] == 0){
-			$ok = false;
+			$ok = true;
 		}
 		return $ok;
 	}
@@ -269,7 +268,7 @@ class PdoGsb{
 	public function creeNouvellesLignesFrais($idVisiteur,$mois){
         $dernierMois = $this->dernierMoisSaisi($idVisiteur);
         $laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur, $dernierMois);
-        if ($laDerniereFiche['idEtat'] == 'CR') {
+        if(is_array($laDerniereFiche) and $laDerniereFiche['idEtat'] == 'CR') {
             $this->majEtatFicheFrais($idVisiteur, $dernierMois, 'CL');
         }
         $requetePrepare = PdoGsb::$monPdo->prepare(
@@ -695,13 +694,10 @@ public function getLesMoisDisponiblesDontFicheVA($idVisiteur){
      */
     public function updateVAtoRB($idVisiteur, $leMois)
     {
-        $requetePrepare = PDOGSB::$monPdo->prepare(
-            'UPDATE fichefrais'
-            .'SET idEtat = "RB"'
-            ."WHERE fichefrais.idVisiteur = '$idVisiteur'"
-            ."AND fichefrais.mois = '$leMois'"
-        );
-        $requetePrepare->execute();
+		$req = "update fichefrais set idEtat = 'RB', dateModif = now() 
+		where fichefrais.idVisiteur = :idVisiteur and fichefrais.mois = :mois";
+		$resultat = PdoGsb::$monPdo->prepare($req); 
+		$resultat->execute(array( ':idVisiteur' => $idVisiteur, ':mois' => $leMois));
     }
 }
 ?>
