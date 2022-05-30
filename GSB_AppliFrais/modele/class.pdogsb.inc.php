@@ -667,7 +667,7 @@ class PdoGsb{
  * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
 */
 public function getLesMoisDisponiblesDontFicheVA($idVisiteur){
-    $req = "select fichefrais.mois as mois from  fichefrais where fichefrais.idVisiteur = :idVisiteur and fichefrais.idetat='VA'
+    $req = "select fichefrais.mois as mois from  fichefrais where fichefrais.idVisiteur = :idVisiteur and fichefrais.idetat='CR'
     order by fichefrais.mois desc ";
     $idJeuRes = PdoGsb::$monPdo->prepare($req); 
     $idJeuRes->execute(array( ':idVisiteur' => $idVisiteur));	
